@@ -1,0 +1,18 @@
+[build]
+  base = "."
+  publish = "dist"
+  command = "npm run build"
+
+# SPA routing redirect: all routes point to index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Optional API proxy: If you deploy the backend on Render/Railway,
+# you can route /api/* directly to your backend URL:
+# [[redirects]]
+#   from = "/api/*"
+#   to = "https://your-backend-service.onrender.com/api/:splat"
+#   status = 200
+#   force = true
