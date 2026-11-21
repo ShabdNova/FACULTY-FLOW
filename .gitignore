@@ -36,3 +36,4 @@ backend/.venv
 
 # Local Netlify folder
 .netlify
+@inyourarea/*.png

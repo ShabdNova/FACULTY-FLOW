@@ -11,10 +11,11 @@ interface AuthModalProps {
 
 type AuthMode = 'login' | 'signup' | 'forgot' | 'reset'
 
-const ROLE_ICONS: Record<UserRole, 'shield' | 'building' | 'book'> = {
+const ROLE_ICONS: Record<UserRole, 'shield' | 'building' | 'book' | 'graduation-cap'> = {
   Admin: 'shield',
   HOD: 'building',
   Faculty: 'book',
+  Student: 'graduation-cap',
 }
 
 export function AuthPortal({ onSuccess }: AuthModalProps) {
@@ -315,7 +316,7 @@ export function AuthPortal({ onSuccess }: AuthModalProps) {
 
           <div className="demo-roles">
             <span className="demo-roles-label">Demo roles</span>
-            {(['Admin', 'HOD', 'Faculty'] as UserRole[]).map((r) => (
+            {(['Admin', 'HOD', 'Faculty', 'Student'] as UserRole[]).map((r) => (
               <button
                 key={r}
                 type="button"

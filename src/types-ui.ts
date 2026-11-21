@@ -11,4 +11,10 @@ export type Page =
   | 'rooms'
   | 'reports'
   | 'settings'
+  | 'attendance'
+  | 'results'
+  | 'fees'
+  | 'library'
+  | 'notices'
+  | 'profile'
 

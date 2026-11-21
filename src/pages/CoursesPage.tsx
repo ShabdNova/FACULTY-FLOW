@@ -7,6 +7,7 @@ import { Modal } from '../components/Modal'
 import { ConfirmDialog } from '../components/Modal'
 import { Icon } from '../components/Icon'
 import { useToast } from '../components/Toast'
+import { useAuth } from '../context/AuthContext'
 
 interface CoursesPageProps {
   store: AppStore
@@ -26,6 +27,8 @@ const emptyCourse = {
 
 export function CoursesPage({ store, search, onSchedule }: CoursesPageProps) {
   const { data, mutations } = store
+  const { role } = useAuth()
+  const isStudent = role === 'Student'
   const toast = useToast()
   const [dept, setDept] = useState('all')
   const [semester, setSemester] = useState('all')
@@ -126,9 +129,11 @@ export function CoursesPage({ store, search, onSchedule }: CoursesPageProps) {
             {data.courses.length} courses offered this term · {totalCredits} credits in the current view. Weekly hours are compared with the timetable when reports are generated.
           </p>
         </div>
-        <button type="button" className="btn btn-primary" onClick={openCreate}>
-          <Icon name="plus" size={15} /> Add course
-        </button>
+        {!isStudent && (
+          <button type="button" className="btn btn-primary" onClick={openCreate}>
+            <Icon name="plus" size={15} /> Add course
+          </button>
+        )}
       </div>
 
       <div className="filterbar">
@@ -175,9 +180,11 @@ export function CoursesPage({ store, search, onSchedule }: CoursesPageProps) {
               </th>
               <th scope="col">Faculty in charge</th>
               <th scope="col">Scheduled</th>
-              <th scope="col" className="ta-right">
-                Actions
-              </th>
+              {!isStudent && (
+                <th scope="col" className="ta-right">
+                  Actions
+                </th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -215,19 +222,21 @@ export function CoursesPage({ store, search, onSchedule }: CoursesPageProps) {
                     </span>
                     {short && <span className="cell-sub">{course.weeklyHours - scheduled} period(s) pending</span>}
                   </td>
-                  <td className="ta-right actions-cell">
-                    <div className="row-actions" role="group" aria-label={`Actions for ${course.code}`}>
-                      <button type="button" className="action-btn action-schedule" onClick={() => onSchedule(course.id)}>
-                        <Icon name="plus" size={13} /> Schedule
-                      </button>
-                      <button type="button" className="action-btn action-edit" onClick={() => openEdit(course.id)}>
-                        <Icon name="edit" size={13} /> Edit
-                      </button>
-                      <button type="button" className="action-btn action-remove" onClick={() => setDeletingId(course.id)}>
-                        <Icon name="trash" size={13} /> Remove
-                      </button>
-                    </div>
-                  </td>
+                  {!isStudent && (
+                    <td className="ta-right actions-cell">
+                      <div className="row-actions" role="group" aria-label={`Actions for ${course.code}`}>
+                        <button type="button" className="action-btn action-schedule" onClick={() => onSchedule(course.id)}>
+                          <Icon name="plus" size={13} /> Schedule
+                        </button>
+                        <button type="button" className="action-btn action-edit" onClick={() => openEdit(course.id)}>
+                          <Icon name="edit" size={13} /> Edit
+                        </button>
+                        <button type="button" className="action-btn action-remove" onClick={() => setDeletingId(course.id)}>
+                          <Icon name="trash" size={13} /> Remove
+                        </button>
+                      </div>
+                    </td>
+                  )}
                 </tr>
               )
             })}

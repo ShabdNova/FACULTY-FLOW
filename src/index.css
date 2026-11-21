@@ -2,4 +2,5 @@
 @import './styles/shell.css';
 @import './styles/modules.css';
 @import './styles/modules-restored.css';
+@import './styles/pages.css';
 @import './styles/auth.css';

@@ -97,7 +97,7 @@ export interface Settings {
 }
 
 
-export type UserRole = 'Admin' | 'HOD' | 'Faculty'
+export type UserRole = 'Admin' | 'HOD' | 'Faculty' | 'Student'
 
 export interface UserProfile {
   id: string
@@ -174,6 +174,30 @@ export interface AcademicCalendarEvent {
   startTime?: string
   endTime?: string
   term?: TermKey
+}
+
+export interface StudentAttendance {
+  courseId: string
+  courseCode: string
+  courseTitle: string
+  facultyName: string
+  credits: number
+  totalClasses: number
+  attendedClasses: number
+  percentage: number
+}
+
+export interface StudentProfileData {
+  id: string
+  studentId: string
+  name: string
+  email: string
+  department: string
+  section: string
+  semester: string
+  academicYear: string
+  avatar: string
+  phone: string
 }
 
 

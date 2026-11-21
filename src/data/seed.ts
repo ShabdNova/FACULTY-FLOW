@@ -237,6 +237,18 @@ export const DEMO_USERS: UserProfile[] = [
     phone: '+91 98765 40318',
     bio: 'Teaches Operating Systems and Systems Architecture. Active coordinator of Linux & Open Source labs.',
   },
+  {
+    id: 'u-student',
+    name: 'Aarav Singhania',
+    email: 'aarav.2024cse@kce.ac.in',
+    role: 'Student',
+    department: 'Computer Science',
+    title: 'B.Tech Student (Semester 6)',
+    avatar: 'AS',
+    empOrRollNo: '24CSE042',
+    phone: '+91 98765 20442',
+    bio: 'Undergraduate student enrolled in B.Tech Computer Science & Engineering, Section CSE-2B.',
+  },
 ]
 
 export const SEED_BOOKINGS: RoomBooking[] = [
@@ -507,3 +519,16 @@ export const SEED_CALENDAR_EVENTS: AcademicCalendarEvent[] = [
     term: 'even',
   },
 ]
+
+export const DEFAULT_STUDENT_PROFILE = {
+  id: 'u-student',
+  studentId: '24CSE042',
+  name: 'Aarav Singhania',
+  email: 'aarav.2024cse@kce.ac.in',
+  department: 'Computer Science',
+  section: 'CSE-2B',
+  semester: 'Semester 6',
+  academicYear: '2026–27',
+  avatar: 'AS',
+  phone: '+91 98765 20442',
+}

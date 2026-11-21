@@ -38,6 +38,7 @@ type IconName =
   | 'torch'
   | 'arrow-left'
   | 'grip'
+  | 'graduation-cap'
 
 const paths: Record<IconName, string> = {
   dashboard: 'M3 10.5 12 3l9 7.5M5 9.5V21h14V9.5M9.5 21v-6h5v6',
@@ -79,6 +80,7 @@ const paths: Record<IconName, string> = {
   torch: 'M10 3h4l-.6 4.5h-2.8zM9.2 7.5h5.6l1.2 4.5H8zM10.6 12v8.5h2.8V12',
   'arrow-left': 'M19 12H5M11 6l-6 6 6 6',
   grip: 'M9 6h.01M9 12h.01M9 18h.01M15 6h.01M15 12h.01M15 18h.01',
+  'graduation-cap': 'M22 10v6M2 10l10-5 10 5-10 5z M6 12v5c0 2 3 3 6 3s6-1 6-3v-5',
 }
 
 

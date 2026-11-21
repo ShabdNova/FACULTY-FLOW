@@ -8,6 +8,14 @@ import { DAY_NAMES, PERIODS, SECTIONS } from './data/seed'
 import { periodLabel } from './lib/timetable'
 import { CoursesPage } from './pages/CoursesPage'
 import { Dashboard } from './pages/Dashboard'
+import { StudentDashboard } from './pages/StudentDashboard'
+import {
+  StudentFeesPage,
+  StudentLibraryPage,
+  StudentNoticesPage,
+  StudentProfilePage,
+  StudentResultsPage,
+} from './pages/StudentPages'
 import { FacultyPage } from './pages/FacultyPage'
 import { ReportsPage } from './pages/ReportsPage'
 import { RoomsPage } from './pages/RoomsPage'
@@ -37,14 +45,16 @@ const ROLE_PAGES: Record<UserRole, Page[]> = {
     'dashboard', 'timeline', 'timetable', 'workload', 'bookings', 'leaves', 'calendar',
     'faculty', 'courses', 'rooms',
   ],
+  Student: [
+    'dashboard', 'notices', 'timetable', 'attendance', 'courses', 'results', 'calendar',
+    'library', 'fees', 'profile',
+  ],
 }
 
 /**
- * Storage written by removed features (the startup intro and the student role).
- * Only these keys are cleared — settings, the timetable and everything else the
- * app still uses are left untouched.
+ * Storage written by legacy intro tours.
  */
-const OBSOLETE_STORAGE_KEYS = ['facultyflow.intro.completed', 'facultyflow.intro.v1', 'facultyflow.students.v1']
+const OBSOLETE_STORAGE_KEYS = ['facultyflow.intro.completed', 'facultyflow.intro.v1']
 
 function purgeObsoleteStorage() {
   for (const key of OBSOLETE_STORAGE_KEYS) {
@@ -55,14 +65,6 @@ function purgeObsoleteStorage() {
       // Storage blocked (private mode) — nothing to clean up.
     }
   }
-  // A saved profile for the removed Student role would reopen a screen that no
-  // longer exists, so fall back to the default admin profile instead.
-  try {
-    const raw = localStorage.getItem('facultyflow_auth_user_v2')
-    if (raw && JSON.parse(raw)?.role === 'Student') localStorage.removeItem('facultyflow_auth_user_v2')
-  } catch {
-    localStorage.removeItem('facultyflow_auth_user_v2')
-  }
 }
 
 purgeObsoleteStorage()
@@ -70,7 +72,7 @@ purgeObsoleteStorage()
 function Workspace() {
   const store = useAppData()
   const toast = useToast()
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, role } = useAuth()
   const [page, setPage] = useState<Page>('dashboard')
   const [section, setSection] = useState('CSE-2B')
   const [search, setSearch] = useState('')
@@ -181,7 +183,11 @@ function Workspace() {
       >
         {/* Keyed by page + semester so each screen enters with the shared transition. */}
         <div key={`${page}-${store.activeTerm}`} className="page-frame">
-          {page === 'dashboard' && (
+          {page === 'dashboard' && role === 'Student' && (
+            <StudentDashboard store={store} onNavigate={goto} />
+          )}
+
+          {page === 'dashboard' && role !== 'Student' && (
             <Dashboard
               store={store}
               section={section}
@@ -194,7 +200,21 @@ function Workspace() {
             />
           )}
 
-          {page === 'timetable' && (
+          {page === 'attendance' && (
+            <StudentDashboard store={store} onNavigate={goto} />
+          )}
+
+          {page === 'notices' && <StudentNoticesPage store={store} onNavigate={goto} />}
+          {page === 'results' && <StudentResultsPage />}
+          {page === 'fees' && <StudentFeesPage />}
+          {page === 'library' && <StudentLibraryPage />}
+          {page === 'profile' && <StudentProfilePage store={store} onNavigate={goto} />}
+
+          {page === 'timetable' && role === 'Student' && (
+            <StudentDashboard store={store} onNavigate={goto} />
+          )}
+
+          {page === 'timetable' && role !== 'Student' && (
             <TimetablePage
               store={store}
               section={section}

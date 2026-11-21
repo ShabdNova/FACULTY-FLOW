@@ -16,22 +16,28 @@ interface NavItem {
 
 export const NAV_ITEMS: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard', icon: 'dashboard', group: 'Overview' },
-  { id: 'timeline', label: 'Activity Timeline', icon: 'clock', group: 'Overview' },
-  { id: 'timetable', label: 'Timetable Builder', icon: 'grid', group: 'Planning' },
-  { id: 'workload', label: 'Faculty Workload', icon: 'chart', group: 'Planning', roles: ['Admin', 'HOD', 'Faculty'] },
-  { id: 'bookings', label: 'Classroom Booking', icon: 'building', group: 'Operations' },
+  { id: 'timeline', label: 'Activity Timeline', icon: 'clock', group: 'Overview', roles: ['Admin', 'HOD', 'Faculty'] },
+  { id: 'notices', label: 'Notice Board', icon: 'info', group: 'Overview', roles: ['Student'] },
+  { id: 'timetable', label: 'Timetable', icon: 'grid', group: 'Planning' },
+  { id: 'attendance', label: 'My Attendance', icon: 'clock-check', group: 'Academics', roles: ['Student'] },
+  { id: 'courses', label: 'Courses', icon: 'book', group: 'Academics' },
+  { id: 'results', label: 'Exams & Results', icon: 'star', group: 'Academics', roles: ['Student'] },
+  { id: 'calendar', label: 'Academic Calendar', icon: 'calendar', group: 'Academics' },
+  { id: 'library', label: 'Library', icon: 'book', group: 'Campus', roles: ['Student'] },
+  { id: 'fees', label: 'Fees & Payments', icon: 'chart', group: 'Campus', roles: ['Student'] },
+  { id: 'profile', label: 'My Profile', icon: 'user', group: 'Account', roles: ['Student'] },
+  { id: 'workload', label: 'Faculty Workload', icon: 'chart', group: 'Operations', roles: ['Admin', 'HOD', 'Faculty'] },
+  { id: 'bookings', label: 'Classroom Booking', icon: 'building', group: 'Operations', roles: ['Admin', 'HOD', 'Faculty'] },
   { id: 'leaves', label: 'Leave & Substitution', icon: 'users', group: 'Operations', roles: ['Admin', 'HOD', 'Faculty'] },
-  { id: 'calendar', label: 'Academic Calendar', icon: 'calendar', group: 'Operations' },
-  { id: 'faculty', label: 'Faculty Directory', icon: 'users', group: 'Registry' },
-  { id: 'courses', label: 'Course Registry', icon: 'book', group: 'Registry' },
-  { id: 'rooms', label: 'Classrooms & Labs', icon: 'building', group: 'Registry' },
+  { id: 'faculty', label: 'Faculty Directory', icon: 'users', group: 'Registry', roles: ['Admin', 'HOD', 'Faculty'] },
+  { id: 'rooms', label: 'Classrooms & Labs', icon: 'building', group: 'Registry', roles: ['Admin', 'HOD', 'Faculty'] },
   { id: 'reports', label: 'Reports & CSV', icon: 'chart', group: 'Administration', roles: ['Admin', 'HOD'] },
   { id: 'settings', label: 'Settings', icon: 'settings', group: 'Administration', roles: ['Admin'] },
 ]
 
 const PAGE_TITLES: Record<Page, { title: string; crumb: string }> = {
   dashboard: { title: 'Dashboard', crumb: 'Overview' },
-  timetable: { title: 'Timetable Builder', crumb: 'Planning' },
+  timetable: { title: 'Timetable', crumb: 'Planning' },
   workload: { title: 'Faculty Workload', crumb: 'Analytics' },
   bookings: { title: 'Classroom Booking', crumb: 'Operations' },
   leaves: { title: 'Leave & Substitution', crumb: 'Operations' },
@@ -42,6 +48,12 @@ const PAGE_TITLES: Record<Page, { title: string; crumb: string }> = {
   rooms: { title: 'Classrooms & Labs', crumb: 'Registry' },
   reports: { title: 'Reports', crumb: 'Administration' },
   settings: { title: 'Settings', crumb: 'Administration' },
+  attendance: { title: 'Attendance Record', crumb: 'Academics' },
+  results: { title: 'Exams & Results', crumb: 'Academics' },
+  fees: { title: 'Fees & Payments', crumb: 'Campus' },
+  library: { title: 'Library', crumb: 'Campus' },
+  notices: { title: 'Notice Board', crumb: 'Overview' },
+  profile: { title: 'My Profile', crumb: 'Account' },
 }
 
 interface ShellProps {
@@ -155,7 +167,7 @@ export function Shell({ page, onNavigate, term, search, onSearch, onRoleContext,
                   <button
                     key={item.id}
                     type="button"
-                    className={`nav-item${page === item.id ? ' active' : ''}`}
+                    className={`nav-item nav-link${page === item.id ? ' active' : ''}`}
                     onClick={() => onNavigate(item.id)}
                     aria-current={page === item.id ? 'page' : undefined}
                   >

@@ -2730,4 +2730,287 @@
   .faculty-facts {
     grid-template-columns: minmax(0, 1fr);
   }
+}/* ---------------------------------------------------------------- */
+/* Student portal — extra sections                                   */
+/* ---------------------------------------------------------------- */
+
+.filterbar .chip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 0 13px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 550;
+  transition: border-color var(--t-fast) ease, background-color var(--t-fast) ease, color var(--t-fast) ease;
+}
+
+.filterbar .chip-btn:hover {
+  border-color: var(--ice);
+  background: var(--ice-soft);
+  color: var(--text);
+}
+
+.student-notice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+.student-notice-card {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--t-fast) ease, box-shadow var(--t-fast) ease, transform var(--t-fast) ease;
+}
+
+.student-notice-card:hover {
+  border-color: #cfe4f6;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.student-notice-card.is-pinned {
+  border-left: 3px solid var(--velvet);
+}
+
+.student-notice-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.student-tag {
+  font-size: 12.5px;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ice-deep);
+  background: var(--ice-soft);
+  border: 1px solid #cfe6f8;
+  padding: 2px 9px;
+  border-radius: 999px;
+}
+
+.student-pin {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--velvet-deep);
+}
+
+.student-notice-card h3 {
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.student-notice-card p {
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.student-notice-card footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+/* Profile */
+
+.student-profile-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 24px 26px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(90% 140% at 0% 0%, rgba(201, 230, 255, 0.55), transparent 62%),
+    radial-gradient(80% 130% at 100% 100%, rgba(242, 216, 228, 0.5), transparent 60%),
+    var(--surface);
+  box-shadow: var(--shadow-md);
+}
+
+.student-profile-avatar {
+  width: 74px;
+  height: 74px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+  font-family: var(--heading);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--velvet-deep);
+  background: linear-gradient(150deg, #fdf4f8, #f2d8e4 70%);
+  border: 1px solid var(--velvet-border);
+  box-shadow: inset 0 1px 0 #fff, 0 10px 22px -16px rgba(156, 45, 88, 0.65);
+}
+
+.student-profile-head {
+  min-width: 0;
+  flex: 1;
+}
+
+.student-profile-head h3 {
+  font-size: 23px;
+}
+
+.student-profile-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 9px;
+}
+
+.student-profile-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.student-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.student-fact {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  min-width: 0;
+}
+
+.student-fact-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--ice-soft);
+  color: var(--ice-ink);
+}
+
+.student-fact-label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 2px;
+}
+
+.student-fact strong {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+  .student-profile-card {
+    padding: 20px;
+  }
+
+  .student-profile-avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 21px;
+    border-radius: 16px;
+  }
+}
+/* Student section tabs — a single segmented strip under the hero */
+
+.student-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.student-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 0;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 14.5px;
+  font-weight: 550;
+  white-space: nowrap;
+  transition: background-color var(--t-fast) ease, color var(--t-fast) ease, box-shadow var(--t-fast) ease;
+}
+
+.student-tab svg {
+  color: var(--text-faint);
+  transition: color var(--t-fast) ease;
+}
+
+.student-tab:hover {
+  background: var(--ice-soft);
+  color: var(--text);
+}
+
+.student-tab:hover svg {
+  color: var(--ice-ink);
+}
+
+.student-tab.is-active {
+  background: linear-gradient(90deg, rgba(201, 230, 255, 0.85), rgba(242, 216, 228, 0.6));
+  color: var(--text);
+  font-weight: 650;
+  box-shadow: inset 0 0 0 1px rgba(185, 217, 242, 0.9);
+}
+
+.student-tab.is-active svg {
+  color: var(--velvet-deep);
+}
+
+@media (max-width: 720px) {
+  .student-tabs {
+    border-radius: 12px;
+  }
+
+  .student-tab {
+    flex: 0 0 auto;
+    padding: 0 12px;
+  }
 }

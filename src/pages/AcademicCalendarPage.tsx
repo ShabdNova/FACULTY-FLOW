@@ -5,6 +5,7 @@ import { Icon } from '../components/Icon'
 import { ConfirmDialog, Modal } from '../components/Modal'
 import { TermSwitch } from '../components/TermSwitch'
 import { useToast } from '../components/Toast'
+import { useAuth } from '../context/AuthContext'
 import {
   addDays,
   dateKey as iso,
@@ -63,6 +64,8 @@ function inTerm(ev: AcademicCalendarEvent, term: TermKey) {
 
 export function AcademicCalendarPage({ store }: { store: AppStore }) {
   const toast = useToast()
+  const { role } = useAuth()
+  const isStudent = role === 'Student'
   const { calendarEvents: events, setCalendarEvents, activeTerm, setTerm, termConfig } = store
   const [view, setView] = useState<'month' | 'week' | 'agenda'>('month')
   const [cursor, setCursor] = useState(() => parse(termConfig.startDate))
@@ -271,9 +274,11 @@ export function AcademicCalendarPage({ store }: { store: AppStore }) {
                 </button>
               ))}
             </div>
-            <button type="button" className="btn btn-primary btn-sm" onClick={() => openCreate()}>
-              <Icon name="plus" size={15} /> Add event
-            </button>
+            {!isStudent && (
+              <button type="button" className="btn btn-primary btn-sm" onClick={() => openCreate()}>
+                <Icon name="plus" size={15} /> Add event
+              </button>
+            )}
           </div>
         </div>
 
@@ -298,15 +303,17 @@ export function AcademicCalendarPage({ store }: { store: AppStore }) {
                   >
                     <div className="cal-day">
                       <span className="cal-day-num">{cell.date.getDate()}</span>
-                      <button
-                        type="button"
-                        className="cal-add"
-                        onClick={() => openCreate(cell.key)}
-                        aria-label={`Add event on ${fmt(cell.key)}`}
-                        title="Add event"
-                      >
-                        <Icon name="plus" size={13} />
-                      </button>
+                      {!isStudent && (
+                        <button
+                          type="button"
+                          className="cal-add"
+                          onClick={() => openCreate(cell.key)}
+                          aria-label={`Add event on ${fmt(cell.key)}`}
+                          title="Add event"
+                        >
+                          <Icon name="plus" size={13} />
+                        </button>
+                      )}
                     </div>
                     {dayEvents.slice(0, 3).map((ev) => {
                       const span = dayPosition(ev, cell.key)

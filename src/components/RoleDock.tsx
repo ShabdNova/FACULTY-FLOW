@@ -7,6 +7,7 @@ const ROLES: { role: UserRole; label: string; icon: IconName; hint: string }[] =
   { role: 'Admin', label: 'Admin', icon: 'shield', hint: 'Dean of academic affairs' },
   { role: 'HOD', label: 'HOD', icon: 'building', hint: 'Department head' },
   { role: 'Faculty', label: 'Faculty', icon: 'book', hint: 'Teaching staff' },
+  { role: 'Student', label: 'Student', icon: 'graduation-cap', hint: 'Student portal' },
 ]
 
 interface RoleDockProps {
